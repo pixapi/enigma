@@ -1,6 +1,6 @@
 # require 'character_map'
 
-class Encryptor
+class Decryptor
 
   def cipher(rotation)
     characters = []
@@ -10,18 +10,16 @@ class Encryptor
     map = Hash[characters.zip(encrypted_characters)]
   end
 
-  def encrypt_letter(letter,rotation)
+  def decrypt_letter(letter, rotation)
     cipher_for_rotation = cipher(rotation)
-    encrypted_letter = cipher_for_rotation[letter.downcase]
+    cipher(rotation).key(letter)
   end
 
-  def encrypt(word, rotation)
-    letters = word.downcase.split("")
-    encryption = []
-    letters.each do |letter|
-      encryption << encrypt_letter(letter, rotation)
-    end
-    encryption = encryption.join
+  def decrypt(encrypted_word, rotation)
+    letters = encrypted_word.split("")
+    decrypted_word = letters.collect do |letter|
+      decrypt_letter(letter,rotation)
+    end.join
   end
-
+  
 end
