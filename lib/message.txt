@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 Hello this is a message ..end..
+=======
+The rain in Spain stays mainly in the plain.
+>>>>>>> 45cac9bdbb26c7fb4154d52bbf34509eba4465a8
