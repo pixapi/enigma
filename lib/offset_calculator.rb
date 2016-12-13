@@ -1,3 +1,5 @@
+#GOAL: Get date, square it, produce 4 offsets, produce 4 rotations
+# from key, create 4 final rotations (each key + each correspondent offset)
 require './lib/key_generator'
 
 class OffsetCalculator

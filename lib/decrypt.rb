@@ -1,6 +1,7 @@
+Goals: 
 # require 'character_map'
 
-class Decryptor
+class Decrypt
 
   def cipher(rotation)
     characters = []
@@ -21,5 +22,5 @@ class Decryptor
       decrypt_letter(letter,rotation)
     end.join
   end
-  
+
 end
