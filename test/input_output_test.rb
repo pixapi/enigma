@@ -1,10 +1,8 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/offset_calculator'
-require 'pry'
-# require './lib/key_generator'
+require './lib/file_runner'
 
-class OffsetCalculatorTest < Minitest::Test
+class InputOutputTest < Minitest::Test
   def test_it_exists
     oc = OffsetCalculator.new
     assert_instance_of OffsetCalculator, oc
@@ -15,10 +13,9 @@ class OffsetCalculatorTest < Minitest::Test
     assert_equal OffsetCalculator, oc.class
   end
 
-  def test_rotations_have_two_digits
-    oc = OffsetCalculator.new
-    oc.get_offset
-    oc.rotations
-    assert_equal 2, oc.rotation_a.to_s.length
+  def test_it_opens_a_file
+    f = InputOutput.new
+    result = f.read_file("message.txt")
+    refute result.closed? , result
   end
 end
