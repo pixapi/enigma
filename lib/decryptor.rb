@@ -1,4 +1,5 @@
 # require 'character_map'
+require 'pry'
 
 class Decryptor
 
@@ -8,6 +9,7 @@ class Decryptor
     characters = characters.flatten
     encrypted_characters = characters.rotate(rotation)
     map = Hash[characters.zip(encrypted_characters)]
+    binding.pry
   end
 
   def decrypt_letter(letter, rotation)

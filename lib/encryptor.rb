@@ -1,6 +1,7 @@
 # require 'character_map'
 
 class Encryptor
+  attr_reader :encryption
 
   def cipher(rotation)
     characters = []
@@ -17,11 +18,11 @@ class Encryptor
 
   def encrypt(word, rotation)
     letters = word.downcase.split("")
-    encryption = []
+    @encryption = []
     letters.each do |letter|
-      encryption << encrypt_letter(letter, rotation)
+      @encryption << encrypt_letter(letter, rotation)
     end
-    encryption = encryption.join
+    @encryption = encryption.join
   end
 
 end
