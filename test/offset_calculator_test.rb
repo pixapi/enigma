@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/offset_calculator'
+require 'pry'
 # require './lib/key_generator'
 
 class OffsetCalculatorTest < Minitest::Test

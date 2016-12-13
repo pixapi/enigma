@@ -1,7 +1,13 @@
 require './lib/key_generator'
 
 class OffsetCalculator
-  attr_reader :rotation_a
+  attr_reader :rotation_a,
+              :rotation_b,
+              :rotation_c,
+              :rotation_d,
+              :offset,
+              :key
+
   def initialize
     @key = KeyGenerator.new.create_key
   end
@@ -10,12 +16,13 @@ class OffsetCalculator
     date = Time.now.strftime("%d%m%y")
     date_squared = date.to_i**2
     @offset = date_squared.to_s[-4..-1].to_i
+    rotations
   end
 
   def rotations
-    @rotation_a = @key[0..1].to_i + @offset[0]
-    @rotation_b = @key[1..2].to_i + @offset[1]
-    @rotation_a = @key[2..3].to_i + @offset[2]
-    @rotation_a = @key[3..4].to_i + @offset[3]
+    @rotation_a = @key[0..1].to_i + @offset.to_s[0].to_i
+    @rotation_b = @key[1..2].to_i + @offset.to_s[1].to_i
+    @rotation_c = @key[2..3].to_i + @offset.to_s[2].to_i
+    @rotation_d = @key[3..4].to_i + @offset.to_s[3].to_i
   end
 end
