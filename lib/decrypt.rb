@@ -1,6 +1,6 @@
 require 'pry'
 class Decrypt
-  attr_reader :encryption
+  attr_reader :decryption
   def initialize(encrypted_file, key, date)
     @decryption = []
     @key = key
@@ -11,16 +11,16 @@ class Decrypt
 
   def get_offset #How can we use the argument data and get rotation without initialize key and offset classes
     date_squared = @date.to_i**2
-    offset = date_squared.to_s[-4..-1].to_i
-    rotations(offset)
+    @offset = date_squared.to_s[-4..-1].to_i
+
     binding.pry
   end
 
-  def rotations(offset)
-    @rotation_a = @key[0..1].to_i + offset.to_s[0].to_i
-    @rotation_b = @key[1..2].to_i + offset.to_s[1].to_i
-    @rotation_c = @key[2..3].to_i + offset.to_s[2].to_i
-    @rotation_d = @key[3..4].to_i + offset.to_s[3].to_i
+  def rotations
+    @rotation_a = @key[0..1].to_i + @offset.to_s[0].to_i
+    @rotation_b = @key[1..2].to_i + @offset.to_s[1].to_i
+    @rotation_c = @key[2..3].to_i + @offset.to_s[2].to_i
+    @rotation_d = @key[3..4].to_i + @offset.to_s[3].to_i
     binding.pry
   end
 
@@ -30,6 +30,7 @@ class Decrypt
 
   def decrypt_message
     get_offset
+    rotations
     letters = @encrypted_message.chars
     binding.pry
     letters.each_with_index do |letter, index|
@@ -44,22 +45,26 @@ class Decrypt
       end
     end
     @decryption.join
+    binding.pry
   end
 
   def decrypt_letter(letter, rotation)
+    negative_rotation = rotation * -1
     binding.pry
-    rotation = rotation - (rotation * 2)
-    decrypted_map = inverse_rotated_map(rotation)
+    # decrypted_map =
+    inverse_rotated_map(negative_rotation)
     @decryption << @map[letter]
   end
 
   def inverse_rotated_map(rotation)
     get_map
     decrypted_characters = @characters.rotate(rotation)
-    @map = Hash[decrypted_characters.zip(@characters)]
+    binding.pry
+    @map = Hash[@characters.zip(decrypted_characters.zip)]
+    binding.pry
   end
 end
 
-decrypt = Decrypt.new("xjj 4", "47719", 141216)
+decrypt = Decrypt.new("6edaa", "17261", 141216)
 
 decrypt.decrypt_message

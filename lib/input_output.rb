@@ -6,11 +6,11 @@ class InputOutput
   end
 
   def read_message(file)
-    File.open(file).read
+    File.open(file).read.chop
   end
 
   def write_encrypted_file(encrypted_message, key)
-    encrypted_file = File.open(ARGV[1], "w")
+    File.open(ARGV[1], "w")
     encrypted_file.write(encrypted_message)
     encrypted_file.close
     puts "Created 'encrypted.txt' with the key #{key} and date #{@date}"
