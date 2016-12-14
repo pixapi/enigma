@@ -1,21 +1,22 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/file_runner'
+require './lib/input_output'
 
 class InputOutputTest < Minitest::Test
   def test_it_exists
-    oc = OffsetCalculator.new
-    assert_instance_of OffsetCalculator, oc
+    input_output = InputOutput.new
+    assert_instance_of InputOutput, input_output
   end
 
   def test_it_has_a_class
-    oc = OffsetCalculator.new
-    assert_equal OffsetCalculator, oc.class
+    input_output = InputOutput.new
+    assert_equal InputOutput, input_output.class
   end
 
   def test_it_opens_a_file
-    f = InputOutput.new
-    result = f.read_file("message.txt")
-    refute result.closed? , result
+    input_output = InputOutput.new
+    result = input_output.read_message("./test/message.txt")
+    expected = "The rain in Spain stays mainly in the plain..end.."
+    assert_equal expected, result
   end
 end
