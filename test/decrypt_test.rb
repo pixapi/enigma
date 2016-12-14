@@ -5,7 +5,7 @@ require './lib/Decrypt'
 class DecryptTest < Minitest::Test
 
   def test_it_exist
-    d = Decrypt.new()
+    d = Decrypt.new("hello", "91422", 14122016)
     assert_instance_of Decrypt, d
   end
 
