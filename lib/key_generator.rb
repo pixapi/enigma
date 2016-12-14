@@ -4,9 +4,8 @@ class KeyGenerator
   attr_reader :key
 
   def create_key
-    @key = rand(99999).to_s
+    # rand(99999).to_s
+    (1..9).cycle(5).to_a.sample(5)
+    #THIS IS AN ARRAY
   end
 end
-# Maybe is better do the 1..9 shuffle so we don't get a 0
-# as starting number of the key, if not it accounts 4 digits
-# length instead of 5

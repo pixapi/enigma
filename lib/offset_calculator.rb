@@ -10,21 +10,18 @@ class OffsetCalculator
               :offset,
               :key
 
-  def initialize
-    @key = KeyGenerator.new.create_key
+  def initialize #(key, date)
+    @date = Time.now.strftime("%d%m%y")
+    @key = KeyGenerator.create_key
   end
 
   def get_offset
-    date = Time.now.strftime("%d%m%y")
-    date_squared = date.to_i**2
-    @offset = date_squared.to_s[-4..-1].to_i
-    rotations
+    date_squared = @date.to_i**2
+    offset = date_squared.to_s.chars[-4..-1]
+    rotations(offset)
   end
 
-  def rotations
-    @rotation_a = @key[0..1].to_i + @offset.to_s[0].to_i
-    @rotation_b = @key[1..2].to_i + @offset.to_s[1].to_i
-    @rotation_c = @key[2..3].to_i + @offset.to_s[2].to_i
-    @rotation_d = @key[3..4].to_i + @offset.to_s[3].to_i
-  end
 end
+
+
+# OffsetCalculator.new('12345', '12142016').get_offset

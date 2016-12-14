@@ -4,15 +4,23 @@ require './lib/Encrypt'
 
 class EncryptTest < Minitest::Test
 
+  # def setup
+  #   @e = Encrypt.new
+  #   @e.rotation_a = 'jifds'
+  # end
+
   def test_it_exist
     e = Encrypt.new
-    assert_instance_of Encrypt, e
+    assert_instance_of Encrypt, @e
   end
 
   def test_it_has_class
     e = Encrypt.new
     assert_equal Encrypt, e.class
   end
+
+  #We can test that 1st character of output same as 5th for "aaaaaaa"
+  #Now we have 4 tests at least and verify that fully works
 
   def test_it_can_encrypt_a_letter
     skip
