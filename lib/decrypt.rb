@@ -1,15 +1,17 @@
-require 'pry'
+require './lib/input_output'
+
 class Decrypt
-  attr_reader :decryption
+  attr_reader :decryption,
+              :key
+
   def initialize(encrypted_file, key, date)
     @decryption = []
+    @encrypted_message = encrypted_file
     @key = key
     @date = date
-    @encrypted_message = encrypted_file
-    #InputOutput.new.read_encrypted_message
   end
 
-  def get_offset #How can we use the argument data and get rotation without initialize key and offset classes
+  def get_offset
     date_squared = @date.to_i**2
     @offset = date_squared.to_s[-4..-1].to_i
   end
@@ -19,7 +21,6 @@ class Decrypt
     @rotation_b = @key[1..2].to_i + @offset.to_s[1].to_i
     @rotation_c = @key[2..3].to_i + @offset.to_s[2].to_i
     @rotation_d = @key[3..4].to_i + @offset.to_s[3].to_i
-    # binding.pry
   end
 
   def get_map
@@ -30,7 +31,6 @@ class Decrypt
     get_offset
     rotations
     letters = @encrypted_message.chars
-    # binding.pry
     letters.each_with_index do |letter, index|
       if index % 4 == 0
         decrypt_letter(letter, @rotation_a)
@@ -42,29 +42,28 @@ class Decrypt
         decrypt_letter(letter, @rotation_d)
       end
     end
-    puts @decryption.join
-    # binding.pry
+    @decryption.join
   end
 
   def decrypt_letter(letter, rotation)
     negative_rotation = rotation * -1
-    # binding.pry
-    # decrypted_map =
     inverse_rotated_map(negative_rotation)
     @decryption << @map[letter]
+
   end
 
   def inverse_rotated_map(rotation)
     get_map
     decrypted_characters = @characters.rotate(rotation)
-    # binding.pry
     @map = Hash[@characters.zip(decrypted_characters.zip)]
-    # binding.pry
   end
 end
 
-
 i = InputOutput.new.read_message(ARGV[0])
-decryptor = Decrypt.new(i, "13929", 141216)
-# decrypt = Decrypt.new("6edaa", "17261", 141216)
-decryptor.decrypt_message
+d = Decrypt.new(ARGV[0], ARGV[2], ARGV[3])
+d.decrypt_message
+o = InputOutput.new.write_decrypted_file(ARGV[1], d.decryption)
+
+#Decrypt works, I leave this temporarily to be able to quick verify:
+#decrypt = Decrypt.new("t8vu02inz7ih", "82442", 141216)
+# decrypt.decrypt_message

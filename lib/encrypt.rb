@@ -13,9 +13,8 @@ class Encrypt
 
   def initialize
     @rotator = Rotator.new
-    @key = @rotator.key #HOW CAN I PASS THIS INFO TO INPUT_OUTPUT.RB???
+    @key = @rotator.key
     @encryption = []
-    # @message = InputOutput.new.read_message(ARGV[0])
   end
 
   def get_rotations
@@ -45,8 +44,6 @@ class Encrypt
       end
     end
     @encryption.join
-    # binding.pry
-    # create_encrypted_file
   end
 
   def encrypt_letter(letter, rotation)
