@@ -13,7 +13,17 @@ class KeyGeneratorTest < Minitest::Test
     assert_equal KeyGenerator, kg.class
   end
 
-  def test_it_generates_four_element_key
+  def test_key_generated_is_not_nil
+    kg = KeyGenerator.new
+    refute_equal nil, kg.create_key.class
+  end
+
+  def test_key_generatored_is_a_string
+    kg = KeyGenerator.new
+    assert_equal String, kg.create_key.class
+  end
+
+  def test_it_generates_five_element_key
     kg = KeyGenerator.new
     kg.create_key
     assert_equal 5, kg.key.length
