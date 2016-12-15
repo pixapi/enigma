@@ -1,10 +1,12 @@
+require 'pry'
+
 class InputOutput
   def initialize
     @date = Time.now.strftime("%d%m%y")
   end
 
   def read_message(file)
-    File.open(file).read.chop
+    file = File.open(file).read.chomp
   end
 
   def write_encrypted_file(file, encrypted_message, key)
@@ -17,21 +19,24 @@ class InputOutput
 
   def write_decrypted_file(file, decrypted_message)
     file = File.open(ARGV[1], "w")
+    # binding.pry
     decrypted_message = decrypted_message.join
+    # binding.pry
     key = ARGV[2]
     date = ARGV[3]
+    # binding.pry
     file.write(decrypted_message)
     file.close
     puts "Created #{ARGV[1]} with the key #{key} and date #{date}"
   end
 
-  def write_cracked_file(file, cracked_message, key)
-    file = File.open(ARGV[1], "w")
-    cracked_message = cracked_message.join
-    date = ARGV[2]
-    file.write(cracked_message)
-    file.close
-    puts "Created #{ARGV[1]} with the key #{key} and date #{date}"
-  end
+  # def write_cracked_file(file, cracked_message, key)
+  #   file = File.open(ARGV[1], "w")
+  #   cracked_message = cracked_message.join
+  #   date = ARGV[2]
+  #   file.write(cracked_message)
+  #   file.close
+  #   puts "Created #{ARGV[1]} with the key #{key} and date #{date}"
+  # end
 
 end

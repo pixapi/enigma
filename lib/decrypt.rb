@@ -30,7 +30,9 @@ class Decrypt
   def decrypt_message
     get_offset
     rotations
+    # binding.pry
     letters = @encrypted_message.chars
+    # binding.pry
     letters.each_with_index do |letter, index|
       if index % 4 == 0
         decrypt_letter(letter, @rotation_a)
@@ -43,12 +45,14 @@ class Decrypt
       end
     end
     @decryption.join
+    # binding.pry
   end
 
   def decrypt_letter(letter, rotation)
     negative_rotation = rotation * -1
     inverse_rotated_map(negative_rotation)
     @decryption << @map[letter]
+    # binding.pry
 
   end
 
@@ -60,10 +64,12 @@ class Decrypt
 end
 
 i = InputOutput.new.read_message(ARGV[0])
-d = Decrypt.new(ARGV[0], ARGV[2], ARGV[3])
+# binding.pry
+d = Decrypt.new(i, ARGV[2], ARGV[3])
+# binding.pry
 d.decrypt_message
 o = InputOutput.new.write_decrypted_file(ARGV[1], d.decryption)
-
+# binding.pry
 #Decrypt works, I leave this temporarily to be able to quick verify:
 #decrypt = Decrypt.new("t8vu02inz7ih", "82442", 141216)
 # decrypt.decrypt_message
