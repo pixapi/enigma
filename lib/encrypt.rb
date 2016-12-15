@@ -4,7 +4,8 @@ require 'pry'
 
 class Encrypt
 
-  attr_reader   :encryption
+  attr_reader   :encryption,
+                :key
   attr_accessor :rotation_a,
                 :rotation_b,
                 :rotation_c,
@@ -14,6 +15,7 @@ class Encrypt
     @rotator = Rotator.new
     @key = @rotator.key #HOW CAN I PASS THIS INFO TO INPUT_OUTPUT.RB???
     @encryption = []
+    # @message = InputOutput.new.read_message(ARGV[0])
   end
 
   def get_rotations
@@ -42,8 +44,9 @@ class Encrypt
         encrypt_letter(letter, @rotation_d)
       end
     end
-    puts encryption.join
-    # creates_file(encryption)
+    @encryption.join
+    # binding.pry
+    # create_encrypted_file
   end
 
   def encrypt_letter(letter, rotation)
@@ -53,16 +56,13 @@ class Encrypt
 
   def get_rotated_map(rotation)
     get_map
-    # character_map = CharacterMap.new
     encrypted_characters = @characters.rotate(rotation)
     @map = Hash[@characters.zip(encrypted_characters)]
   end
 
-  # def creates_file(encrypted_message, key)
-  #   @input_output.write_file#(ARGV[1], @rotator.key)
-  # end
 end
 
 e = Encrypt.new
 i = InputOutput.new.read_message(ARGV[0])
 e.encrypt_message(i)
+o = InputOutput.new.write_encrypted_file(ARGV[1], e.encryption, e.key)
