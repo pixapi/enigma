@@ -3,7 +3,6 @@ require 'minitest/pride'
 require './lib/Decrypt'
 
 class DecryptTest < Minitest::Test
-
   def test_it_exist
     d = Decrypt.new("hello", "91422", 14122016)
     assert_instance_of Decrypt, d
@@ -44,5 +43,4 @@ class DecryptTest < Minitest::Test
     decrypted_message = "that would be great. i will be at school by 8pm..end.."
     assert_equal decrypted_message, d.decrypt_message(encrypted_message, 52)
   end
-
 end

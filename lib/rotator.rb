@@ -19,7 +19,3 @@ class Rotator
     @rotation_d = @key[3..4].to_i + @offset[3].to_i
   end
 end
-
-# r = Rotator.new
-# r.rotations
-# WORKS!!!
