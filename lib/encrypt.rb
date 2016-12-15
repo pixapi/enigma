@@ -2,7 +2,6 @@ require './lib/rotator'
 require './lib/input_output'
 
 class Encrypt
-
   attr_reader   :encryption,
                 :key
   attr_accessor :rotation_a,
@@ -55,7 +54,6 @@ class Encrypt
     encrypted_characters = @characters.rotate(rotation)
     @map = Hash[@characters.zip(encrypted_characters)]
   end
-
 end
 
 e = Encrypt.new

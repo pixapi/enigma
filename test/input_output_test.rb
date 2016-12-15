@@ -13,10 +13,17 @@ class InputOutputTest < Minitest::Test
     assert_equal InputOutput, input_output.class
   end
 
-  def test_it_opens_a_file
+  def test_it_reads_a_file
     input_output = InputOutput.new
     result = input_output.read_message("./test/message.txt")
     expected = "The rain in Spain stays mainly in the plain..end.."
+    assert_equal expected, result
+  end
+
+  def test_it_reads_a_second_file
+    input_output = InputOutput.new
+    result = input_output.read_message("./test/message_test.txt")
+    expected = "Hello!..end.."
     assert_equal expected, result
   end
 end
