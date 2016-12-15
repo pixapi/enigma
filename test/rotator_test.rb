@@ -8,16 +8,6 @@ class RotatorTest < Minitest::Test
     assert_instance_of Rotator, r
   end
 
-  def test_key_can_pass_through
-    kg = KeyGenerator.new
-    assert_instance_of KeyGenerator, kg
-  end
-
-  def test_offset_calculator_can_pass_through
-    oc = OffsetCalculator.new
-    assert_instance_of OffsetCalculator, oc
-  end
-
   def test_it_has_a_class
     r = Rotator.new
     assert_equal Rotator, r.class
@@ -28,31 +18,29 @@ class RotatorTest < Minitest::Test
     assert_equal 2, r.rotations.to_s.length
   end
 
-  def test_rotations_are_random_each_time
+  def test_rotations_are_unique_each_time
     r_one = Rotator.new
     r_two = Rotator.new
-    refute_equal r_one.rotations, r_two.rotations
+    r_one.rotations
+    r_two.rotations
+    refute_equal r_one.rotation_b, r_two.rotation_b
   end
 
   def test_rotations_are_not_nil
     r = Rotator.new
-    refute_equal nil, r.rotations.class
+    r.rotations
+    refute_equal nil, r.rotation_a
   end
 
   def test_rotations_returns_fixnum
     r = Rotator.new
-    assert_equal Fixnum, r.rotations.class
-  end
-
-  def test_rotations_repeat_every_four_characters
-  skip
-    r= Rotator.new
-   #here the assert or equal statement
+    r.rotations
+    assert_equal Fixnum, r.rotation_c.class
   end
 
   def test_rotations
-    skip
-    r_one = Rotator.new
-    refute_equal r_one.rotation_a, r_one.rotation_b
+    r = Rotator.new
+    r.rotations
+    refute_equal r.rotation_a, r.rotation_b
   end
 end
