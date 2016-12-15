@@ -1,37 +1,42 @@
-# Goals: Read message_file and write encrypted_file,
-#reads encrypted_file and writes decrypted_file
+require 'pry'
+
 class InputOutput
-
   def initialize
-    @key = KeyGenerator.new.key
-    @date = Date.today
+    @date = Time.now.strftime("%d%m%y")
   end
 
-  def read_file(file)
-    file = ARGV[0]
-    File.read(file).chomp
-    #filename.close
+  def read_message(file)
+    file = File.open(file).read.chomp
   end
 
-  def write_file(encrypted_message)
+  def write_encrypted_file(file, encrypted_message, key)
     encrypted_file = File.open(ARGV[1], "w")
+    encrypted_message = encrypted_message.join
     encrypted_file.write(encrypted_message)
     encrypted_file.close
-    puts "Created 'encrypted.txt' with the key #{@key} and date #{@date}"
+    puts "Created #{ARGV[1]} with the key #{key} and date #{@date}"
   end
 
-  def read_file(filename)
-    filename = ARGV[0]
-    File.read(filename).chomp
-    #filename.close
+  def write_decrypted_file(file, decrypted_message)
+    file = File.open(ARGV[1], "w")
+    # binding.pry
+    decrypted_message = decrypted_message.join
+    # binding.pry
+    key = ARGV[2]
+    date = ARGV[3]
+    # binding.pry
+    file.write(decrypted_message)
+    file.close
+    puts "Created #{ARGV[1]} with the key #{key} and date #{date}"
   end
 
-  def write_file(text)
-    written_file = File.open(ARGV[1], "w")
-    written_file.write(text)
-    written_file.close
-    puts "Created 'decrypted.txt' with the key #{@key} and date #{@date}"
-  end
-
+  # def write_cracked_file(file, cracked_message, key)
+  #   file = File.open(ARGV[1], "w")
+  #   cracked_message = cracked_message.join
+  #   date = ARGV[2]
+  #   file.write(cracked_message)
+  #   file.close
+  #   puts "Created #{ARGV[1]} with the key #{key} and date #{date}"
+  # end
 
 end
