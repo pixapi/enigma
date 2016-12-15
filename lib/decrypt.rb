@@ -1,4 +1,5 @@
 require './lib/input_output'
+require 'pry'
 
 class Decrypt
   attr_reader :decryption,

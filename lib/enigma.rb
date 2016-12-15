@@ -1,6 +1,6 @@
 require './lib/encrypt'
 require './lib/decrypt'
-# require './lib/crack'
+require './lib/cracker'
 
 class Enigma
   def initialize
@@ -16,7 +16,7 @@ class Enigma
     @decryptor.decrypt_message(message, key, date)
   end
 
-  # def crack
-  #   @cracker.crack(message)
-  # end
+  def crack
+    @cracker.crack(message)
+  end
 end
